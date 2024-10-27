@@ -5,8 +5,14 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint . ",
+    "start": "node src/api/app.js",
+    "dev": "nodemon src/api/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engines": {
+    "node": ">=20.17.0"
+  },
+  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -23,7 +29,9 @@
     "prettier": "^3.3.3"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "express": "^4.21.1"
+    "express": "^4.21.1",
+    "helmet": "^8.0.0"
   }
 }

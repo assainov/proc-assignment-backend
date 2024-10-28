@@ -21,6 +21,6 @@ export default () => ({
 
     logger.info('Finished fetching data from SWAPI');
 
-    return data.results;
+    return data;
   }
 });

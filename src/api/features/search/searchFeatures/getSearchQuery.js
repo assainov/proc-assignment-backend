@@ -17,7 +17,7 @@ export default async (payload, cachedTimeMinutes, searchRepository, searchServic
     validTimeRange
   );
 
-  if (validSearchRecord) return validSearchRecord;
+  if (validSearchRecord) return validSearchRecord.results;
 
   // The cache is empty or expired, so we need to fetch the data from the SWAPI
   const results = await searchService.searchPeople(payload.search, payload.page);
@@ -26,5 +26,5 @@ export default async (payload, cachedTimeMinutes, searchRepository, searchServic
 
   await searchRepository.addAsync(searchPayload);
 
-  return searchPayload;
+  return searchPayload.results;
 };

@@ -7,10 +7,13 @@ export default (error, req, res, next) => {
 
   // All errors from async & non-async route above will be handled here
   if (error) {
-    // console.log(error)
+    const isServerError = error instanceof ServerError || error instanceof Error;
+
+    isServerError && console.error(error);
+
     return res.status(error.statusCode).json({
       status: error.status,
-      message: error instanceof ServerError ? publicMessage : error.message,
+      message: isServerError ? publicMessage : error.message,
     });
   }
   next();

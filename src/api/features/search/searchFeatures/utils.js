@@ -4,5 +4,7 @@ export const getTimeMinutesAgo = (minutes) => {
   }
 
   const currentTime = new Date();
-  return new Date(currentTime.getTime() - minutes * 60 * 1000);
+  return new Date(currentTime.getTime() - minutes * 60 * 1000).toISOString();
 };
+
+export const getCurrentTime = () => new Date().toISOString();

@@ -1,4 +1,4 @@
-export default class Search {
+export default class SearchRecord {
   constructor(
     datetime,
     payload,

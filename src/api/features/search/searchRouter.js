@@ -1,5 +1,6 @@
 import searchRepositoryPg from '../../../infrastructure/database/repositories/searchRepositoryPg.js';
 import swapiService from '../../../infrastructure/swapi/swapiService.js';
+import {authenticate} from '../../middleware/authMiddleware.js';
 import {asyncErrorHandler} from '../../utils/asyncErrorHandler.js';
 import searchController from './searchController.js';
 
@@ -16,7 +17,7 @@ export default (express) => {
 
   router
     .route('/')
-    .get(asyncErrorHandler(controller.searchHandler));
+    .get(authenticate, asyncErrorHandler(controller.searchHandler));
 
   return router;
 };

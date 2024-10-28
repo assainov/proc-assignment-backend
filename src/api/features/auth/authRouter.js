@@ -1,6 +1,7 @@
 import userRepositoryPg from '../../../infrastructure/database/repositories/userRepositoryPg.js';
 import encryptionService from '../../../infrastructure/security/encryptionService.js';
 import jwtTokenService from '../../../infrastructure/security/jwtTokenService.js';
+import {authenticate} from '../../middleware/authMiddleware.js';
 import {asyncErrorHandler} from '../../utils/asyncErrorHandler.js';
 import authController from './authController.js';
 
@@ -24,7 +25,7 @@ export default (express) => {
 
   router
     .route('/me')
-    .get(asyncErrorHandler(controller.meHandler));
+    .get(authenticate, asyncErrorHandler(controller.meHandler));
 
   return router;
 };

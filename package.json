@@ -7,7 +7,11 @@
     "lint": "eslint . ",
     "start": "node src/api/app.js",
     "dev": "nodemon src/api/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "typeorm:generate": "npx typeorm migration:generate -d src/infrastructure/data-source.js --outputJs",
+    "typeorm:migrate": "npx typeorm-ts-node-esm migration:run -d src/infrastructure/data-source.js",
+    "typeorm:revert": "npx typeorm migration:revert -d src/infrastructure/data-source.js",
+    "typeorm:drop": "npx typeorm schema:drop -d src/infrastructure/data-source.js"
   },
   "engines": {
     "node": ">=20.17.0"
@@ -32,6 +36,9 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
-    "helmet": "^8.0.0"
+    "helmet": "^8.0.0",
+    "pg": "^8.13.1",
+    "ts-node": "^10.9.2",
+    "typeorm": "^0.3.20"
   }
 }

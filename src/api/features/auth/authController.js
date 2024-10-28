@@ -1,4 +1,4 @@
-import login from '../../../use-cases/auth/login.js';
+import login from './authFeatures/login.js';
 
 export default (userRepository) => {
 

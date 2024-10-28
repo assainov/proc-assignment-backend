@@ -1,4 +1,4 @@
-import userRepositoryPg from '../../../infrastructure/repositories/userRepositoryPg.js';
+import userRepositoryPg from '../../../infrastructure/database/repositories/userRepositoryPg.js';
 import authController from './authController.js';
 
 export default (express) => {

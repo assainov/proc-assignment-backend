@@ -1,7 +1,10 @@
 import express from 'express';
 import registerMiddleware from './middleware/registerMiddleware.js';
-import registerControllers from './controllers/registerControllers.js';
+import registerControllers from './features/registerControllers.js';
 import config from './config.js';
+import {initializeDatabase} from '../infrastructure/database/helpers/initializeDatabase.js';
+
+initializeDatabase();
 
 const app = express();
 

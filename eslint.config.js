@@ -6,7 +6,9 @@ export default [
   pluginJs.configs.recommended,
   importPlugin.flatConfigs.recommended,
   {
-    ignores: ['dist'],
+    ignores: ['dist', 'node_modules', '**/migrations/*'],
+  },
+  {
     files: ['**/*.{js,mjs,cjs}'],
     languageOptions: {
       ecmaVersion: 2022,

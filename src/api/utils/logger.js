@@ -28,6 +28,24 @@ export const pinoLogger = pino(
   transport
 );
 
+/**
+ * Logger utility using pinoLogger for logging messages at different levels.
+ * 
+ * @namespace logger
+ * 
+ * @property {function} debug - Logs debug level messages.
+ * @property {function} info - Logs info level messages.
+ * @property {function} error - Logs error level messages.
+ * @property {function} warn - Logs warn level messages.
+ * 
+ * Each logging function accepts a variable number of arguments and logs each argument separately.
+ * 
+ * @example
+ * logger.debug('Debug message');
+ * logger.info('Info message');
+ * logger.error('Error message');
+ * logger.warn('Warning message');
+ */
 const logger = {
   debug: (...args) => {
     args.map(arg => {

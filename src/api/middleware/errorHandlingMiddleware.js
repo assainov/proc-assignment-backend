@@ -1,4 +1,4 @@
-import {ServerError} from '../entities/errors.js';
+import {ClientError, NotFoundError} from '../entities/errors.js';
 import logger from '../utils/logger.js';
 
 const publicMessage = 'Something went wrong. Please try again later.';
@@ -8,7 +8,7 @@ export default (error, req, res, next) => {
 
   // All errors from async & non-async route above will be handled here
   if (error) {
-    const isServerError = error instanceof ServerError || error instanceof Error;
+    const isServerError = !(error instanceof ClientError) && !(error instanceof NotFoundError);
 
     isServerError && logger.error(error);
 

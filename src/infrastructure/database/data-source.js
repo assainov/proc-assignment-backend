@@ -1,5 +1,6 @@
 import {DataSource} from 'typeorm';
 import config from '../../api/config.js';
+import {SearchEntity} from './entities/searchEntity.js';
 
 const dataSource = new DataSource({
   type: 'postgres',
@@ -12,7 +13,7 @@ const dataSource = new DataSource({
   migrationsRun: false,
   logging: false,
   autoLoadEntities: true,
-  entities: ['src/infrastructure/entities/**/*{.js,.ts}'],
+  entities: [SearchEntity],
   migrations: ['src/infrastructure/migrations/**/*{.js,.ts}'],
   subscribers: ['src/infrastructure/subscribers/**/*{.js,.ts}'],
 });

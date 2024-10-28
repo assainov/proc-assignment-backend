@@ -1,6 +1,6 @@
 import {getTimeMinutesAgo} from './utils.js';
 
-export default async (payload, cachedTimeMinutes, searchRepository) => {
+export default async (payload, cachedTimeMinutes, searchRepository, /* externalSearchService */) => {
   if (!payload || !payload.search || !payload.search.length) {
     throw new Error('search field cannot be empty');
   }
@@ -10,13 +10,10 @@ export default async (payload, cachedTimeMinutes, searchRepository) => {
     to: new Date().toISOString(),
   };
 
-  const results = await searchRepository.findByPayload(
-    {
-      search: payload.search,
-      page: payload.page && payload.page.length > 1 ? payload.page : 1,
-    },
+  const validRecord = await searchRepository.searchWithinTimeRange(
+    payload,
     validTimeRange
   );
 
-  return results;
+  return validRecord ? validRecord.results : null;
 };

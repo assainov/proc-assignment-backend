@@ -1,6 +1,7 @@
 import {Between} from 'typeorm';
 import appDataSource from '../data-source.js';
 import {SearchEntity} from '../entities/searchEntity.js';
+import {ClientError} from '../../../api/entities/errors.js';
 
 const searchRepository = appDataSource.getRepository(SearchEntity);
 
@@ -10,7 +11,7 @@ export default () => ({
     const {search, page} = payload;
 
     if (!search || !search.length) {
-      throw new Error('search parameter cannot be empty');
+      throw new ClientError('search parameter cannot be empty');
     }
 
     const result = await searchRepository.findOne({

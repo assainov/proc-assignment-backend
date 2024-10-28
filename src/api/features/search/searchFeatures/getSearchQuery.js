@@ -1,8 +1,9 @@
+import {ClientError} from '../../../entities/errors.js';
 import {getTimeMinutesAgo} from './utils.js';
 
 export default async (payload, cachedTimeMinutes, searchRepository, /* externalSearchService */) => {
   if (!payload || !payload.search || !payload.search.length) {
-    throw new Error('search field cannot be empty');
+    throw new ClientError('search field cannot be empty');
   }
 
   const validTimeRange = {

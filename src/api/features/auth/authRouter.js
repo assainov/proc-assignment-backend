@@ -1,4 +1,5 @@
 import userRepositoryPg from '../../../infrastructure/database/repositories/userRepositoryPg.js';
+import {asyncErrorHandler} from '../../utils/asyncErrorHandler.js';
 import authController from './authController.js';
 
 export default (express) => {
@@ -12,7 +13,7 @@ export default (express) => {
   // GET endpoints
   router
     .route('/login')
-    .get(controller.loginHandler);
+    .get(asyncErrorHandler(controller.loginHandler));
 
   // router
   //   .route('/signup')

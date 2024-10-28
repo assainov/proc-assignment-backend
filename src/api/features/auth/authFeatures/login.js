@@ -1,19 +1,22 @@
-export default (email, password, userRepository) => {
+import {ClientError} from '../../../entities/errors.js';
+
+export default async (email, password, userRepository, encryptionService, tokenService) => {
   if (!email || !password) {
-    // throw new AuthError('email and password fields cannot be empty');
-
-    const error = new Error('email and password fields cannot be empty');
-    throw error;
+    throw new ClientError('Ensure that all fields are filled: email, password');
   }
 
-  const user = userRepository.findByEmail({email});
+  const user = await userRepository.findByEmail(email);
 
-  if (!user.length) {
-    const error = new Error('Invalid email or password');
-    throw error;
-  }
+  if (!user) throw new ClientError('Invalid email or password');
 
-  const generateToken = '123';
+  const passwordMatches = await encryptionService.comparePassword(password, user.hashedPassword);
 
-  return generateToken;
+  if (!passwordMatches) throw new ClientError('Invalid email or password');
+
+  return {
+    email: user.email,
+    firstname: user.firstname,
+    surname: user.surname,
+    token: tokenService.generateToken(user.email)
+  };
 };

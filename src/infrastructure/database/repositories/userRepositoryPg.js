@@ -1,21 +1,17 @@
+import dataSource from '../data-source.js';
+import {UserEntity} from '../entities/userEntity.js';
+
+const userRepository = dataSource.getRepository(UserEntity);
+
 export default () => {
-  const findByEmail = (params) => {
-    console.log('hello', params);
+  const findByEmail = async (email) =>
+    await userRepository.findOneBy({email});
 
-    return 'hello';
-  };
-
-  const findById = (id) => {
-    console.log('hello', id);
-  };
-
-  const add = (userEntity) => {
-    console.log('hello', userEntity);
-  };
+  const create = async (firstname, surname, email, hashedPassword) =>
+    await userRepository.save(userRepository.create({firstname, surname, email, hashedPassword}));
 
   return {
     findByEmail,
-    findById,
-    add
+    create
   };
 };

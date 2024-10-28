@@ -8,10 +8,10 @@
     "start": "node src/api/app.js",
     "dev": "nodemon src/api/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "typeorm:generate": "npx typeorm migration:generate -d src/infrastructure/data-source.js --outputJs",
-    "typeorm:migrate": "npx typeorm-ts-node-esm migration:run -d src/infrastructure/data-source.js",
-    "typeorm:revert": "npx typeorm migration:revert -d src/infrastructure/data-source.js",
-    "typeorm:drop": "npx typeorm schema:drop -d src/infrastructure/data-source.js"
+    "typeorm:generate": "npx typeorm migration:generate -d src/infrastructure/database/data-source.js --outputJs",
+    "typeorm:migrate": "npx typeorm-ts-node-esm migration:run -d src/infrastructure/database/data-source.js",
+    "typeorm:revert": "npx typeorm migration:revert -d src/infrastructure/database/data-source.js",
+    "typeorm:drop": "npx typeorm schema:drop -d src/infrastructure/database/data-source.js"
   },
   "engines": {
     "node": ">=20.17.0"
@@ -33,6 +33,7 @@
     "prettier": "^3.3.3"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "cuid": "^3.0.0",
     "date-fns": "^4.1.0",
@@ -41,6 +42,7 @@
     "express-http-context": "^1.2.4",
     "express-requests-logger": "^4.0.1",
     "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
     "pg": "^8.13.1",
     "pino": "^9.5.0",
     "pino-http": "^10.3.0",

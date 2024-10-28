@@ -1,4 +1,6 @@
 import userRepositoryPg from '../../../infrastructure/database/repositories/userRepositoryPg.js';
+import encryptionService from '../../../infrastructure/security/encryptionService.js';
+import jwtTokenService from '../../../infrastructure/security/jwtTokenService.js';
 import {asyncErrorHandler} from '../../utils/asyncErrorHandler.js';
 import authController from './authController.js';
 
@@ -6,18 +8,23 @@ export default (express) => {
   const router = express.Router();
 
   const userRepository = userRepositoryPg();
+  const encryptService = encryptionService();
+  const tokenService = jwtTokenService();
 
   // load controller with dependencies
-  const controller = authController(userRepository);
+  const controller = authController(userRepository, encryptService, tokenService);
 
-  // GET endpoints
   router
     .route('/login')
-    .get(asyncErrorHandler(controller.loginHandler));
+    .post(asyncErrorHandler(controller.loginHandler));
 
-  // router
-  //   .route('/signup')
-  //   .get(controller.signup);
+  router
+    .route('/signup')
+    .post(asyncErrorHandler(controller.signupHandler));
+
+  router
+    .route('/me')
+    .get(asyncErrorHandler(controller.meHandler));
 
   return router;
 };

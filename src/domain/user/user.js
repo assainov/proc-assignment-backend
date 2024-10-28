@@ -1,17 +1,13 @@
 export default class User {
   constructor(
-    id,
-    firstName,
-    lastName,
+    firstname,
+    surname,
     email,
-    createdAt,
-    updatedAt,
+    hashedPassword
   ) {
-    this.id = id;
-    this.firstName = firstName;
-    this.lastName = lastName;
+    this.firstname = firstname;
+    this.surname = surname;
     this.email = email;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
+    this.hashedPassword = hashedPassword;
   }
 }

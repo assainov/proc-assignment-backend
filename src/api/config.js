@@ -3,6 +3,7 @@ dotenv.config();
 
 const getConfig = () => ({
   NODE_ENV: process.env.NODE_ENV || 'development',
+  LOG_LEVEL: process.env.LOG_LEVEL || 'info',
   PORT: process.env.PORT || 3000,
   CACHED_TIME_MINUTES: process.env.CACHED_TIME_MINUTES,
   CLIENT_URL: process.env.CLIENT_URL || '*',

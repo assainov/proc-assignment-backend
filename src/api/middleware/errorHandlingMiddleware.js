@@ -1,4 +1,5 @@
 import {ServerError} from '../entities/errors.js';
+import logger from '../utils/logger.js';
 
 const publicMessage = 'Something went wrong. Please try again later.';
 
@@ -9,7 +10,7 @@ export default (error, req, res, next) => {
   if (error) {
     const isServerError = error instanceof ServerError || error instanceof Error;
 
-    isServerError && console.error(error);
+    isServerError && logger.error(error);
 
     return res.status(error.statusCode).json({
       status: error.status,

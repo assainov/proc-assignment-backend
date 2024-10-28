@@ -3,6 +3,7 @@ import appDataSource from '../data-source.js';
 import {SearchEntity} from '../entities/searchEntity.js';
 import {ClientError} from '../../../api/entities/errors.js';
 import SearchRecord from '../../../domain/searchRecord/searchRecord.js';
+import logger from '../../../api/utils/logger.js';
 
 const searchRepository = appDataSource.getRepository(SearchEntity);
 
@@ -15,7 +16,8 @@ export default () => ({
       throw new ClientError('search parameter cannot be empty');
     }
 
-    console.info('Started searching for cached data');
+    logger.info('Started searching for cached data');
+    logger.debug('Search payload:', payload);
     const result = await searchRepository.findOne({
       where: {
         payload: {
@@ -27,16 +29,18 @@ export default () => ({
     });
 
     if (result === null) {
-      console.info('No cached data found');
+      logger.info('No cached data found');
       return null;
     }
 
-    console.info('Found cached data');
+    logger.info('Found cached data');
+    logger.debug('Cached data:', result);
     return new SearchRecord(result.datetime, result.payload, result.results);
   },
 
   addAsync: async (searchPayload) => {
-    console.info('Started caching search data');
+    logger.info('Started caching search data');
+    logger.debug('searchPayload:', searchPayload);
 
     await searchRepository.save({
       datetime: searchPayload.datetime,
@@ -44,6 +48,6 @@ export default () => ({
       results: searchPayload.results,
     });
 
-    console.info('Finished caching search data');
+    logger.info('Finished caching search data');
   }
 });

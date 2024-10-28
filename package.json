@@ -7,7 +7,7 @@
     "lint": "eslint . ",
     "start": "node src/api/app.js",
     "dev": "nodemon src/api/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "typeorm:generate": "npx typeorm migration:generate -d src/infrastructure/database/data-source.js --outputJs",
     "typeorm:migrate": "npx typeorm-ts-node-esm migration:run -d src/infrastructure/database/data-source.js",
     "typeorm:revert": "npx typeorm migration:revert -d src/infrastructure/database/data-source.js",
@@ -21,6 +21,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.25.9",
     "@eslint/js": "^9.13.0",
     "eslint": "^9.13.0",
     "eslint-plugin-import": "^2.31.0",

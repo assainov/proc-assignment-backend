@@ -34,7 +34,7 @@ export const authenticate = (req, res, next) => {
   try {
     const token = header.slice(7);
     const payload = jwt.verify(token, process.env.JWT_SECRET);
-    console.log('payload', payload);
+
     req.user = payload;
     next();
   } catch (error) {

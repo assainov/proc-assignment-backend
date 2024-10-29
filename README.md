@@ -31,9 +31,9 @@ A caching engine abstracting away Star Wars API - search people endpoint.
   ```
 
 2. **(Optional) Restore the DB backup file**:
-  using pgAdmin, or:
+  
   ```bash
-  pg_restore -U your_username -d your_database_name pg_dump.sql
+  using pgAdmin, restore the database to map to the .env variables
   ```
 
 3. **(Optional) Alternatively, migrate with the script**:
@@ -50,6 +50,8 @@ A caching engine abstracting away Star Wars API - search people endpoint.
   ```bash
   npm start
   ```
+6. **(Optional) Changing the caching interval**:
+  Change the `CACHED_TIME_MINUTES` to test different cache validity times.
 
   ## Project Structure
   The idea behind the project structure is to be able to extend the codebase into a large project. Mainly, there are two types of files: automatic config files, which you don't really need to think twice about once you get used to them, and the core logic files, which enable you to think about the business logic. Configuration files are less testable, while business logic files are highly testable.
@@ -59,11 +61,15 @@ A caching engine abstracting away Star Wars API - search people endpoint.
   ```
   src
   ├── api
+  ├    └── features
+  ├           ├── auth
+  ├           └── search
   ├── domain
   └── infrastructure
   ```
 
-  - **api**: Contains web server-specific code as well as the entry point. Also contains features - highly testable code orchestrating the core logic.
+  - **api**: Contains web server-specific code as well as the entry point.
+  - **api > features**: Contains a feature specific set of routes, controllers as well as the business logic - a highly testable code orchestrating the core use cases.
   - **domain**: Application entities. This code grows with domain-driven design and deeper business logic. As we're running a cache server, there isn't much now.
   - **infrastructure**: Contains the implementation details, such as database connections, external API integrations, and other services.
 

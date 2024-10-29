@@ -51,7 +51,9 @@ A caching engine abstracting away Star Wars API - search people endpoint.
   npm start
   ```
 6. **(Optional) Changing the caching interval**:
-  Change the `CACHED_TIME_MINUTES` to test different cache validity times.
+```bash
+  Change the CACHED_TIME_MINUTES to test different cache validity times.
+  ```
 
   ## Project Structure
   The idea behind the project structure is to be able to extend the codebase into a large project. Mainly, there are two types of files: automatic config files, which you don't really need to think twice about once you get used to them, and the core logic files, which enable you to think about the business logic. Configuration files are less testable, while business logic files are highly testable.
